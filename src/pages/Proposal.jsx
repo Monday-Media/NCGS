@@ -524,9 +524,12 @@ const HTML_CONTENT = `<!DOCTYPE html>
 
 <script>
   const nav = document.getElementById('stickyNav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > window.innerHeight * 0.8) { nav.classList.add('visible'); } else { nav.classList.remove('visible'); }
-  });
+  function updateNav() {
+    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollY > window.innerHeight * 0.8) { nav.classList.add('visible'); } else { nav.classList.remove('visible'); }
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  document.addEventListener('scroll', updateNav, { passive: true });
 </script>
 </body>
 </html>`;
